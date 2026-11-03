@@ -1,0 +1,557 @@
+:root {
+    /* Background */
+    --bg-main: #232d5b;
+    --bg-secondary: #2f4595;
+    --bg-card: #1b2957;
+
+    /* Accent colors */
+    --accent-primary: #9287e1;
+    --accent-secondary: #59d5e0;
+    --accent-yellow: #ffd166;
+    --accent-pink: #ff8fab;
+    --accent-green: #70e1b5;
+
+    /* Text */
+    --text-main: #aea5a5;
+    --text-secondary: #b8c5ed;
+    --text-dark: #172554;
+
+    /* Buttons */
+    --btn-primary: #7765e3;
+    --btn-hover: #353150;
+
+    /* Borders */
+    --border-color: rgba(255, 255, 255, 0.15);
+
+    /* Shadows */
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.2);
+    --shadow-glow: 0 0 25px rgba(139, 124, 246, 0.3);
+
+    /* Radius */
+    --radius-sm: 12px;
+    --radius-md: 20px;
+    --radius-lg: 30px;
+
+    /* Spacing */
+    --space-sm: 10px;
+    --space-md: 20px;
+    --space-lg: 40px;
+
+    /* Animation */
+    --transition-main: 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+
+    color: var(--text-main);
+    background: var(--bg-main);
+}
+
+/* ==============================
+   GAME CONTAINER
+============================== */
+
+.game {
+    width: min(100% - 30px, 900px);
+    min-height: 90vh;
+
+    margin: 30px auto;
+    padding: clamp(20px, 4vw, 45px);
+
+    background: linear-gradient(145deg,
+            var(--bg-secondary),
+            var(--bg-card));
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-soft);
+
+    text-align: center;
+}
+
+/* header */
+
+.game-header {
+    margin-bottom: var(--space-lg);
+}
+
+.game-header h1 {
+    margin-bottom: 12px;
+
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--accent-yellow);
+}
+
+.game-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+/* ==============================
+   START SCREEN
+============================== */
+
+.start-screen h2 {
+    margin-bottom: 20px;
+
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+}
+
+.start-screen p {
+    margin-bottom: 35px;
+
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.level-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* Level buttons */
+
+.level-btn {
+    min-height: 150px;
+    padding: 25px 15px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 15px;
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+
+    background: var(--bg-card);
+    color: var(--text-main);
+
+    font-size: 1.3rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: var(--transition-main);
+}
+
+.level-btn span {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
+.level-btn:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-glow);
+}
+
+/* ==============================
+   GAME INFO
+============================== */
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+    margin-bottom: 25px;
+
+    padding: 15px 25px;
+
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+}
+
+.game-info p {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.game-info span {
+    color: var(--accent-yellow);
+}
+
+/* ==============================
+   SPACE SCENE
+============================== */
+
+.space-scene {
+    position: relative;
+
+    width: 100%;
+    height: 360px;
+
+    overflow: hidden;
+
+    border-radius: var(--radius-lg);
+
+    background:
+        radial-gradient(circle at 50% 80%,
+            #283e83,
+            transparent 65%),
+        #080f2e;
+
+    border: 1px solid var(--border-color);
+}
+
+/* Stars */
+
+.space-scene::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        radial-gradient(2px 1px at 30px 30px,
+            rgb(209, 143, 143) 99%,
+            transparent),
+
+        radial-gradient(2px 2px at 120px 80px,
+            rgb(95, 113, 14) 99%,
+            transparent),
+
+        radial-gradient(3px 3px at 230px 40px,
+            #ffd166 99%,
+            transparent),
+
+        radial-gradient(4px 4px at 80px 170px,
+            rgb(240, 238, 234) 50%,
+            transparent),
+
+        radial-gradient(2px 2px at 90px 70px,
+            rgb(21, 176, 223) 99%,
+            transparent);
+
+    background-size: 300px 200px;
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+/* Rocket */
+
+.rocket {
+    position: absolute;
+    left: 10%;
+    bottom: 50px;
+
+    font-size: 55px;
+
+    transition: transform 0.8s ease;
+
+    animation: rocketFloat 2.5s ease-in-out infinite;
+}
+
+/* Planet */
+
+.planet {
+    position: absolute;
+    right: 8%;
+    top: 45px;
+
+    font-size: 90px;
+
+    animation: planetFloat 4s ease-in-out infinite;
+}
+
+/* Animations */
+
+@keyframes rocketFloat {
+
+    0%,
+    100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -8px;
+    }
+}
+
+@keyframes planetFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* ==============================
+   PROGRESS BAR
+============================== */
+
+.progress-container {
+    width: 100%;
+    height: 16px;
+
+    margin: 25px 0 35px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+    background: var(--bg-main);
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+
+    border-radius: 20px;
+
+    background: linear-gradient(90deg,
+            var(--accent-primary),
+            var(--accent-secondary));
+
+    transition: width 0.6s ease;
+}
+
+/* ==============================
+   MATH QUESTION
+============================== */
+
+.question-container {
+    padding: 25px;
+
+    border-radius: var(--radius-lg);
+
+    background: var(--bg-card);
+}
+
+#math-question {
+    margin-bottom: 30px;
+
+    font-size: clamp(2.5rem, 6vw, 4rem);
+
+    color: var(--accent-yellow);
+}
+
+/* ==============================
+   ANSWERS
+============================== */
+
+.answers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.answer-btn {
+    min-height: 80px;
+
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+
+    background: var(--btn-primary);
+    color: var(--text-main);
+
+    font-size: 1.8rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: var(--transition-main);
+}
+
+.answer-btn:hover {
+    background: var(--btn-hover);
+    transform: translateY(-4px);
+}
+
+.answer-btn:active {
+    transform: scale(0.96);
+}
+
+/* Answer states for JavaScript */
+
+.answer-btn.correct {
+    background: var(--accent-green);
+    color: var(--text-dark);
+}
+
+.answer-btn.incorrect {
+    background: var(--accent-pink);
+    color: var(--text-dark);
+}
+
+.answer-btn:disabled {
+    cursor: default;
+}
+
+/* ==============================
+   FEEDBACK
+============================== */
+
+.feedback {
+    min-height: 30px;
+    margin-top: 20px;
+
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.next-btn,
+.restart-btn {
+    margin-top: 20px;
+    padding: 15px 30px;
+
+    border: none;
+    border-radius: var(--radius-md);
+
+    background: var(--accent-yellow);
+    color: var(--text-dark);
+
+    font-size: 1rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: var(--transition-main);
+}
+
+.next-btn:hover,
+.restart-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow);
+}
+
+
+
+.result-screen {
+    padding: 40px 20px;
+}
+
+.result-screen h2 {
+    margin-bottom: 25px;
+
+    font-size: 2.5rem;
+    color: var(--accent-yellow);
+}
+
+.result-screen p {
+    margin-bottom: 25px;
+    color: var(--text-secondary);
+}
+
+.final-score {
+    margin: 25px auto;
+    padding: 25px;
+
+    max-width: 350px;
+
+    border-radius: var(--radius-md);
+    background: var(--bg-card);
+
+    font-size: 1.5rem;
+}
+
+#final-score {
+    color: var(--accent-yellow);
+    font-weight: 700;
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media (max-width: 768px) {
+    .game {
+        margin: 15px auto;
+        min-height: 95vh;
+    }
+
+    .level-container {
+        grid-template-columns: 1fr;
+    }
+
+    .level-btn {
+        min-height: 95px;
+    }
+
+    .space-scene {
+        height: 200px;
+    }
+
+    .rocket {
+        font-size: 50px;
+    }
+
+    .planet {
+        font-size: 65px;
+    }
+
+    .answers {
+        gap: 10px;
+    }
+
+    .answer-btn {
+        min-height: 70px;
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .game {
+        width: calc(100% - 16px);
+        padding: 18px 12px;
+    }
+
+    .game-info {
+        padding: 12px;
+        font-size: 0.85rem;
+    }
+
+    .question-container {
+        padding: 20px 12px;
+    }
+
+    .answer-btn {
+        min-height: 65px;
+        font-size: 1.3rem;
+    }
+}
+
+/* ==============================
+   ACCESSIBILITY
+============================== */
+
+[hidden] {
+    display: none !important;
+}
+
+button:focus-visible {
+    outline: 3px solid var(--accent-yellow);
+    outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}

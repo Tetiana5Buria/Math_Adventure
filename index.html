@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Math Adventure | Космічна математика</title>
+
+    <meta name="description"
+        content="Інтерактивна математична гра для дітей 7–8 років. Розв'язуй приклади та подорожуй космосом!">
+
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+
+<body>
+
+    <main class="game">
+
+        <!-- HEADER -->
+
+        <header class="game-header">
+            <h1>🚀 Math Adventure</h1>
+
+            <p class="game-subtitle">
+                Космічна математична пригода!
+            </p>
+        </header>
+
+
+
+        <section class="start-screen" id="start-screen">
+
+            <h2>Вітаємо, космічний досліднику! 🌟</h2>
+
+            <p>
+                Обери свою планету та вирушай
+                у математичну подорож.
+            </p>
+
+            <div class="level-container">
+
+                <button class="level-btn" type="button" data-level="easy">
+
+                    🌍 Земля
+                    <span>Легкий рівень</span>
+
+                </button>
+
+                <button class="level-btn" type="button" data-level="medium">
+
+                    🪐 Марс
+                    <span>Середній рівень</span>
+
+                </button>
+
+                <button class="level-btn" type="button" data-level="hard">
+
+                    🚀 Юпітер
+                    <span>Складний рівень</span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+
+        <section class="game-screen" id="game-screen" hidden>
+
+
+
+            <div class="game-info">
+
+                <p>
+                    ⭐ Бали:
+                    <span id="score">0</span>
+                </p>
+
+                <p>
+                    🎯 Завдання:
+                    <span id="question-number">1</span>/10
+                </p>
+
+            </div>
+
+
+
+
+            <div class="space-scene">
+
+                <div class="rocket" id="rocket">
+                    🚀
+                </div>
+
+                <div class="planet" id="planet">
+                    🪐
+                </div>
+
+            </div>
+
+
+            <!-- PROGRESS -->
+
+            <div class="progress-container">
+
+                <div class="progress-bar" id="progress-bar">
+                </div>
+
+            </div>
+
+
+            <!-- MATH QUESTION -->
+
+            <div class="question-container">
+
+                <h2 id="math-question"></h2>
+
+                <div class="answers">
+                    <button class="answer-btn" type="button"></button>
+                    <button class="answer-btn" type="button"></button>
+                    <button class="answer-btn" type="button"></button>
+
+                </div>
+
+                <p id="feedback" class="feedback" aria-live="polite">
+                </p>
+
+                <button id="next-btn" class="next-btn" type="button" hidden>
+                    Наступне завдання ➜
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESULT SCREEN -->
+
+        <section class="result-screen" id="result-screen" hidden>
+
+            <h2>🎉 Місію завершено!</h2>
+
+            <p>
+                Вітаємо! Ти долетів до планети!
+            </p>
+
+            <div class="final-score">
+
+                ⭐ Твої бали:
+                <span id="final-score">0</span>
+
+            </div>
+
+            <button id="restart-btn" class="restart-btn" type="button">
+                🔄 Грати знову
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script type="module" src="./js/main.js"></script>
+
+</body>
+
+</html>
