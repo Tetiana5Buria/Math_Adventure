@@ -74,6 +74,10 @@
 
 
             <div class="game-info">
+                <p class="timer">
+                    ⏱ Час:
+                    <span id="timer">20</span> с
+                </p>
 
                 <p>
                     ⭐ Бали:
@@ -144,15 +148,38 @@
 
             <h2>🎉 Місію завершено!</h2>
 
-            <p>
-                Вітаємо! Ти долетів до планети!
-            </p>
+            <p>Вітаємо! Ти долетів до планети!</p>
 
             <div class="final-score">
-
                 ⭐ Твої бали:
                 <span id="final-score">0</span>
+            </div>
 
+            <div class="best-result">
+                🏆 Найкращий результат:
+                <span id="best-score">0</span>
+            </div>
+
+            <h3 class="results-title">
+                🏅 Таблиця рекордів
+            </h3>
+
+            <p id="results-level"></p>
+
+            <div class="results-table-wrapper">
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Місце</th>
+                            <th>Дата</th>
+                            <th>Бали</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="results-body">
+                        <!-- JS додасть результати -->
+                    </tbody>
+                </table>
             </div>
 
             <button id="restart-btn" class="restart-btn" type="button">

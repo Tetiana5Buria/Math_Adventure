@@ -1,8 +1,3 @@
-/* =====================================
-   MATH ADVENTURE
-   Questions for Grade 2
-===================================== */
-
 export const questions = {
   // ===================================
   // EASY LEVEL — EARTH
@@ -35,11 +30,7 @@ export const questions = {
     { id: 20, question: "17 - 8", answer: 9 },
   ],
 
-  // ===================================
   // MEDIUM LEVEL — MARS
-  // Addition and subtraction up to 100
-  // Mostly without crossing tens
-  // ===================================
 
   medium: [
     { id: 21, question: "20 + 30", answer: 50 },
@@ -67,11 +58,7 @@ export const questions = {
     { id: 40, question: "84 - 32", answer: 52 },
   ],
 
-  // ===================================
   // HARD LEVEL — JUPITER
-  // Addition and subtraction up to 100
-  // Crossing tens
-  // ===================================
 
   hard: [
     { id: 41, question: "27 + 18", answer: 45 },

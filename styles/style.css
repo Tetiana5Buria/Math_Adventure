@@ -180,6 +180,17 @@ body {
     border-radius: var(--radius-md);
 }
 
+.timer {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.timer span {
+    color: var(--accent-yellow);
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
 .game-info p {
     color: var(--text-secondary);
     font-weight: 600;
@@ -250,12 +261,14 @@ body {
 
 .rocket {
     position: absolute;
-    left: 10%;
+    left: 15%;
     bottom: 50px;
 
     font-size: 55px;
 
-    transition: transform 0.8s ease;
+    transition:
+        left 0.8s ease,
+        bottom 0.8s ease;
 
     animation: rocketFloat 2.5s ease-in-out infinite;
 }
@@ -469,6 +482,98 @@ body {
 #final-score {
     color: var(--accent-yellow);
     font-weight: 700;
+}
+
+/* ============================
+   BEST RESULT
+============================ */
+
+.best-result {
+    margin: 20px auto;
+    padding: 18px 25px;
+
+    max-width: 350px;
+
+    background: var(--bg-card);
+    border: 2px solid var(--accent-yellow);
+    border-radius: var(--radius-md);
+
+    color: var(--text-main);
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+#best-score {
+    color: var(--accent-yellow);
+    font-size: 1.5rem;
+}
+
+/* ============================
+   RESULTS TABLE
+============================ */
+
+.results-title {
+    margin: 35px 0 15px;
+    color: var(--accent-yellow);
+    font-size: 1.5rem;
+}
+
+#results-level {
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+}
+
+.results-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.results-table th,
+.results-table td {
+    padding: 14px 12px;
+    text-align: center;
+}
+
+.results-table th {
+    background: var(--btn-primary);
+    color: var(--text-main);
+}
+
+.results-table td {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.results-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.results-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+/* Best result */
+
+.results-table .top-result {
+    background: rgba(255, 209, 102, 0.15);
+    color: var(--accent-yellow);
+    font-weight: 700;
+}
+
+@media (max-width: 480px) {
+
+    .results-table th,
+    .results-table td {
+        padding: 10px 6px;
+        font-size: 0.85rem;
+    }
 }
 
 /* ==============================

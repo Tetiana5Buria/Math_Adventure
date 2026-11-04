@@ -1,4 +1,5 @@
 import { getRandomQuestion, generateAnswers, checkAnswer } from "./game.js";
+import { getBestResult, saveResult, getTopResults } from "./storage.js";
 
 /* DOM */
 const startScreen = document.getElementById("start-screen");
@@ -19,6 +20,10 @@ const restartButton = document.getElementById("restart-btn");
 const progressBar = document.getElementById("progress-bar");
 const rocket = document.getElementById("rocket");
 const finalScore = document.getElementById("final-score");
+const timerElement = document.getElementById("timer");
+const bestScore = document.getElementById("best-score");
+const resultsBody = document.getElementById("results-body");
+const resultsLevel = document.getElementById("results-level");
 /* Game */
 const TOTAL_QUESTIONS = 10;
 const POINTS_PER_ANSWER = 1;
@@ -78,10 +83,8 @@ function showQuestion() {
   usedQuestionIds.add(question.id);
   currentQuestion = question;
 
-  // Показуємо математичний приклад
   mathQuestion.textContent = `${question.question} = ?`;
 
-  // Генеруємо варіанти відповідей
   const answers = generateAnswers(question.answer);
   console.log("Question:", question);
   console.log("Generated answers:", answers);
@@ -94,6 +97,7 @@ function showQuestion() {
 
     button.classList.remove("correct", "incorrect");
   });
+  timerCount(20);
 }
 
 // ============================
@@ -102,7 +106,7 @@ function showQuestion() {
 
 function handleAnswer(event) {
   if (answered) return;
-
+  clearInterval(timerInterval);
   answered = true;
 
   const button = event.currentTarget;
@@ -134,7 +138,6 @@ function handleAnswer(event) {
     });
   }
 
-  // Блокуємо кнопки після відповіді
   answerButtons.forEach((answerButton) => {
     answerButton.disabled = true;
   });
@@ -157,9 +160,11 @@ function updateProgress() {
   const progress = (questionIndex / TOTAL_QUESTIONS) * 100;
 
   progressBar.style.width = `${progress}%`;
-  const rocketPosition = 10 + progress * 0.55;
+  const rocketLeft = 10 + progress * 0.55;
+  const rocketBottom = 10 + progress * 0.45;
 
-  rocket.style.left = `${rocketPosition}%`;
+  rocket.style.left = `${rocketLeft}%`;
+  rocket.style.bottom = `${rocketBottom}%`;
 }
 
 // ============================
@@ -181,9 +186,58 @@ function nextQuestion() {
 // ============================
 
 function finishGame() {
+  clearInterval(timerInterval);
+
   finalScore.textContent = score;
 
   showScreen("result");
+
+  try {
+    saveResult(currentLevel, score, TOTAL_QUESTIONS * POINTS_PER_ANSWER);
+
+    renderResults(currentLevel);
+  } catch (error) {
+    console.error("Помилка під час формування результатів:", error);
+  }
+}
+
+let timerInterval = null;
+let timeLeft = 0;
+
+function timerCount(time) {
+  clearInterval(timerInterval);
+
+  timeLeft = time;
+  timerElement.textContent = timeLeft;
+  timerInterval = setInterval(() => {
+    timeLeft--;
+
+    timerElement.textContent = timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      answered = true;
+
+      feedback.textContent = "⏰ Час вийшов!";
+      feedback.style.color = "var(--accent-pink)";
+
+      answerButtons.forEach((button) => {
+        button.disabled = true;
+
+        if (Number(button.textContent) === currentQuestion.answer) {
+          button.classList.add("correct");
+        }
+      });
+      updateProgress();
+
+      nextButton.textContent =
+        questionIndex === TOTAL_QUESTIONS
+          ? "Завершити місію 🚀"
+          : "Наступне завдання ➜";
+
+      nextButton.hidden = false;
+    }
+  }, 1000);
 }
 
 // ============================
@@ -192,6 +246,7 @@ function finishGame() {
 
 function restartGame() {
   showScreen("start");
+  clearInterval(timerInterval);
 }
 
 // ============================
@@ -214,3 +269,45 @@ nextButton.addEventListener("click", nextQuestion);
 restartButton.addEventListener("click", restartGame);
 
 showScreen("start");
+/* ============================
+   RESULTS TABLE
+============================ */
+
+function renderResults(level) {
+  const best = getBestResult(level);
+  const results = getTopResults(level, 3);
+
+  const levelNames = {
+    easy: "🌍 Земля",
+    medium: "🪐 Марс",
+    hard: "🚀 Юпітер",
+  };
+
+  bestScore.textContent = best ? best.score : 0;
+
+  resultsLevel.textContent = `Рівень: ${levelNames[level]}`;
+
+  // Очищаємо таблицю перед заповненням
+  resultsBody.replaceChildren();
+
+  results.forEach((result, index) => {
+    const row = document.createElement("tr");
+
+    const placeCell = document.createElement("td");
+    const dateCell = document.createElement("td");
+    const scoreCell = document.createElement("td");
+
+    placeCell.textContent = index === 0 ? "🥇 1" : index + 1;
+
+    dateCell.textContent = result.date;
+
+    scoreCell.textContent = `${result.score} / ${result.total}`;
+
+    if (index === 0) {
+      row.classList.add("top-result");
+    }
+
+    row.append(placeCell, dateCell, scoreCell);
+    resultsBody.append(row);
+  });
+}
